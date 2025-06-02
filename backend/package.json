@@ -6,8 +6,10 @@
   "type": "module",
   "scripts": {
     "configp": "node --experimental-default-config-file src/index.ts",
-    "dev": "node --experimental-strip-types --watch src/index.ts",
-    "tsgo": "tsgo"
+    "dev": "node --experimental-strip-types --env=.env --watch src/index.ts",
+    "tsgo": "tsgo",
+    "compose:up": "docker-compose -f docker-compose.yaml up -d",
+    "compose:down": "docker-compose -f docker-compose.yaml down"
   },
   "keywords": [],
   "author": "Gustavo Dantas <gusdantas15@gmail.com>",
