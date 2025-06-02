@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "configp": "node --experimental-default-config-file src/index.ts",
+    "dev": "node --experimental-strip-types --watch src/index.ts",
+    "tsgo": "tsgo"
+  },
+  "keywords": [],
+  "author": "Gustavo Dantas <gusdantas15@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript/native-preview": "7.0.0-dev.20250525.1",
+    "prettier": "^3.5.3"
+  }
+}
