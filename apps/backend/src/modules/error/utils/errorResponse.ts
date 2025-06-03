@@ -1,7 +1,7 @@
 import type { Response } from 'express';
 
 type ErrorHandlerParams = {
-  errorTitle: string;
+  errorTitle?: string;
   errorMessage: string;
   statusCode?: number;
 };
