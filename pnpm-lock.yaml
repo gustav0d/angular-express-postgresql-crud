@@ -38,9 +38,12 @@ importers:
       pg:
         specifier: ^8.16.0
         version: 8.16.0
+      pg-hstore:
+        specifier: ^2.3.4
+        version: 2.3.4
       sequelize:
         specifier: ^6.37.7
-        version: 6.37.7(pg@8.16.0)
+        version: 6.37.7(pg-hstore@2.3.4)(pg@8.16.0)
     devDependencies:
       '@types/bcryptjs':
         specifier: ^2.4.6
@@ -2358,6 +2361,10 @@ packages:
   pg-connection-string@2.9.0:
     resolution: {integrity: sha512-P2DEBKuvh5RClafLngkAuGe9OUlFV7ebu8w1kmaaOgPcpJd1RIFh7otETfI6hAR8YupOLFTY7nuvvIn7PLciUQ==}
 
+  pg-hstore@2.3.4:
+    resolution: {integrity: sha512-N3SGs/Rf+xA1M2/n0JBiXFDVMzdekwLZLAO0g7mpDY9ouX+fDI7jS6kTq3JujmYbtNSJ53TJ0q4G98KVZSM4EA==}
+    engines: {node: '>= 0.8.x'}
+
   pg-int8@1.0.1:
     resolution: {integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==}
     engines: {node: '>=4.0.0'}
@@ -2839,6 +2846,9 @@ packages:
   ua-parser-js@0.7.40:
     resolution: {integrity: sha512-us1E3K+3jJppDBa3Tl0L3MOJiGhe1C6P0+nIvQAFYbxlMAx0h81eOwLmU57xgqToduDDPx3y5QsdjPfDu+FgOQ==}
     hasBin: true
+
+  underscore@1.13.7:
+    resolution: {integrity: sha512-GMXzWtsc57XAtguZgaQViUOzs0KTkk8ojr3/xAxXLITqf/3EMwxC0inyETfDFjH/Krbhuep0HNbbjI9i/q3F3g==}
 
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
@@ -5309,6 +5319,10 @@ snapshots:
 
   pg-connection-string@2.9.0: {}
 
+  pg-hstore@2.3.4:
+    dependencies:
+      underscore: 1.13.7
+
   pg-int8@1.0.1: {}
 
   pg-pool@3.10.0(pg@8.16.0):
@@ -5524,7 +5538,7 @@ snapshots:
 
   sequelize-pool@7.1.0: {}
 
-  sequelize@6.37.7(pg@8.16.0):
+  sequelize@6.37.7(pg-hstore@2.3.4)(pg@8.16.0):
     dependencies:
       '@types/debug': 4.1.12
       '@types/validator': 13.15.1
@@ -5544,6 +5558,7 @@ snapshots:
       wkx: 0.5.0
     optionalDependencies:
       pg: 8.16.0
+      pg-hstore: 2.3.4
     transitivePeerDependencies:
       - supports-color
 
@@ -5834,6 +5849,8 @@ snapshots:
   typescript@5.8.3: {}
 
   ua-parser-js@0.7.40: {}
+
+  underscore@1.13.7: {}
 
   undici-types@6.21.0: {}
 
