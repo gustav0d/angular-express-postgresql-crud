@@ -29,9 +29,6 @@ importers:
       express:
         specifier: ^5.1.0
         version: 5.1.0
-      express-validator:
-        specifier: ^7.2.1
-        version: 7.2.1
       jsonwebtoken:
         specifier: ^9.0.2
         version: 9.0.2
@@ -44,6 +41,9 @@ importers:
       sequelize:
         specifier: ^6.37.7
         version: 6.37.7(pg-hstore@2.3.4)(pg@8.16.0)
+      zod:
+        specifier: ^3.25.49
+        version: 3.25.49
     devDependencies:
       '@types/bcryptjs':
         specifier: ^2.4.6
@@ -1621,10 +1621,6 @@ packages:
   exponential-backoff@3.1.2:
     resolution: {integrity: sha512-8QxYTVXUkuy7fIIoitQkPwGonB8F3Zj8eEO8Sqg9Zv/bkI7RJAzowee4gr81Hak/dUTpA2Z7VfQgoijjPNlUZA==}
 
-  express-validator@7.2.1:
-    resolution: {integrity: sha512-CjNE6aakfpuwGaHQZ3m8ltCG2Qvivd7RHtVMS/6nVxOM7xVGqr4bhflsm4+N5FP5zI7Zxp+Hae+9RE+o8e3ZOQ==}
-    engines: {node: '>= 8.0.0'}
-
   express@5.1.0:
     resolution: {integrity: sha512-DT9ck5YIRU+8GYzzU5kT3eHGA5iL+1Zd0EutOmTE9Dtk+Tvuzd23VBU+ec7HPNSTxXYO55gPV/hq4pSBJDjFpA==}
     engines: {node: '>= 18'}
@@ -2890,10 +2886,6 @@ packages:
     resolution: {integrity: sha512-d7KLgL1LD3U3fgnvWEY1cQXoO/q6EQ1BSz48Sa149V/5zVTAbgmZIpyI8TRi6U9/JNyeYLlTKsEMPtLC27RFUg==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
-  validator@13.12.0:
-    resolution: {integrity: sha512-c1Q0mCiPlgdTVVVIJIrBuxNicYE+t/7oKeI9MWLj3fh/uq2Pxh/3eeWbVZ4OcGW1TUf53At0njHw5SMdA3tmMg==}
-    engines: {node: '>= 0.10'}
-
   validator@13.15.15:
     resolution: {integrity: sha512-BgWVbCI72aIQy937xbawcs+hrVaN/CZ2UwutgaJ36hGqRrLNM+f5LUT/YPRbo8IV/ASeFzXszezV+y2+rq3l8A==}
     engines: {node: '>= 0.10'}
@@ -3038,6 +3030,9 @@ packages:
   yoctocolors-cjs@2.1.2:
     resolution: {integrity: sha512-cYVsTjKl8b+FrnidjibDWskAv7UKOfcwaVZdp/it9n1s9fU3IkgDbhdIRKCW4JDsAlECJY0ytoVPT3sK6kideA==}
     engines: {node: '>=18'}
+
+  zod@3.25.49:
+    resolution: {integrity: sha512-JMMPMy9ZBk3XFEdbM3iL1brx4NUSejd6xr3ELrrGEfGb355gjhiAWtG3K5o+AViV/3ZfkIrCzXsZn6SbLwTR8Q==}
 
   zone.js@0.15.1:
     resolution: {integrity: sha512-XE96n56IQpJM7NAoXswY3XRLcWFW83xe0BiAOeMD7K5k5xecOeul3Qcpx6GqEeeHNkW5DWL5zOyTbEfB4eti8w==}
@@ -4463,11 +4458,6 @@ snapshots:
 
   exponential-backoff@3.1.2: {}
 
-  express-validator@7.2.1:
-    dependencies:
-      lodash: 4.17.21
-      validator: 13.12.0
-
   express@5.1.0:
     dependencies:
       accepts: 2.0.0
@@ -5883,8 +5873,6 @@ snapshots:
 
   validate-npm-package-name@6.0.0: {}
 
-  validator@13.12.0: {}
-
   validator@13.15.15: {}
 
   vary@1.1.2: {}
@@ -5991,5 +5979,7 @@ snapshots:
       yargs-parser: 21.1.1
 
   yoctocolors-cjs@2.1.2: {}
+
+  zod@3.25.49: {}
 
   zone.js@0.15.1: {}
