@@ -7,7 +7,7 @@ const sequelize = new Sequelize({
   username: config.DB_USER || 'postgres',
   password: config.DB_PASSWORD || 'postgres',
   database: config.DB_NAME || 'task_management',
-  port: parseInt(config.DB_PORT) || 5432,
+  port: config.DB_PORT || 5432,
   logging: false,
 });
 

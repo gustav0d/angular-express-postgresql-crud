@@ -16,7 +16,7 @@ const config = {
   DB_USER: ENV.DB_USER ?? 'postgres',
   DB_PASSWORD: ENV.DB_PASSWORD ?? 'postgres',
   DB_NAME: ENV.DB_NAME ?? 'task_management',
-  DB_PORT: ENV.DB_PORT ?? '5432',
+  DB_PORT: parseInt(ENV.DB_PORT ?? '5432'),
 };
 
 export { config };
