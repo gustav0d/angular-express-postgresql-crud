@@ -1,37 +1,31 @@
 import express from 'express';
 import cors from 'cors';
 
-import { testDbConnection } from './database.ts';
+import { startDbConnection } from './database.ts';
 import { config } from './config.ts';
+import { router } from './router.ts';
+import { serverErrorCatcher } from './modules/error/serverErrorCatcher.ts';
 
 const app = express();
 
-const PORT = config.DB_PORT;
+const PORT = config.PORT;
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the Collaborative Task Management API' });
-});
+app.use(router);
 
-(async () => {
-  try {
-    const dbConnected = await testDbConnection();
+app.use(serverErrorCatcher);
 
-    app.listen(PORT, () => {
-      console.log(`⚡️ Server is running on port ${PORT}`);
-      console.log(`🌐 API URL: http://localhost:${PORT}`);
-    });
+try {
+  await startDbConnection();
 
-    if (!dbConnected) {
-      console.error(
-        '❌ Failed to connect to the database. Server not started.',
-      );
-    }
-  } catch (error) {
-    console.error('❌ Error starting the server:', error);
-    process.exit(1);
-  }
-})();
+  app.listen(PORT, () => {
+    console.log(`⚡️ Server is running on port ${PORT}`);
+    console.log(`🌐 API URL: http://localhost:${PORT}`);
+  });
+} catch (error) {
+  console.error('❌ Error starting the server:', error);
+  process.exit(1);
+}

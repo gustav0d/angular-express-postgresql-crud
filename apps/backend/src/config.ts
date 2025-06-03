@@ -12,11 +12,14 @@ dotenv.config({
 const ENV = process.env;
 
 const config = {
+  PORT: parseInt(ENV.PORT ?? '3000'),
   DB_HOST: ENV.DB_HOST ?? 'localhost',
   DB_USER: ENV.DB_USER ?? 'postgres',
   DB_PASSWORD: ENV.DB_PASSWORD ?? 'postgres',
   DB_NAME: ENV.DB_NAME ?? 'task_management',
-  DB_PORT: ENV.DB_PORT ?? '5432',
+  DB_PORT: parseInt(ENV.DB_PORT ?? '5432'),
+  JWT_SECRET: ENV.JWT_SECRET ?? 'test',
+  JWT_EXPIRES_IN: ENV.JWT_EXPIRES_IN ?? '24h',
 };
 
 export { config };
