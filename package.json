@@ -6,11 +6,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "turbo run build",
+    "config:local": "turbo run config:local",
     "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
+    "compose:up": "docker-compose -f docker-compose.yaml up -d",
+    "compose:down": "docker-compose -f docker-compose.yaml down"
   },
   "devDependencies": {
     "prettier": "^3.5.3",

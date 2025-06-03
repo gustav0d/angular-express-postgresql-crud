@@ -9,8 +9,6 @@
     "configp": "node --experimental-default-config-file src/index.ts",
     "dev": "node --experimental-strip-types --watch src/index.ts",
     "tsgo": "tsgo",
-    "compose:up": "docker-compose -f docker-compose.yaml up -d",
-    "compose:down": "docker-compose -f docker-compose.yaml down",
     "config:local": "cp .env.example .env"
   },
   "keywords": [],
