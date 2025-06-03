@@ -12,6 +12,7 @@ dotenv.config({
 const ENV = process.env;
 
 const config = {
+  PORT: parseInt(ENV.PORT ?? '3000'),
   DB_HOST: ENV.DB_HOST ?? 'localhost',
   DB_USER: ENV.DB_USER ?? 'postgres',
   DB_PASSWORD: ENV.DB_PASSWORD ?? 'postgres',

@@ -6,7 +6,7 @@ import { config } from './config.ts';
 
 const app = express();
 
-const PORT = config.DB_PORT;
+const PORT = config.PORT;
 
 app.use(cors());
 app.use(express.json());
