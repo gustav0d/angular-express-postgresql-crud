@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import { User } from '../userModel.ts';
+import { AppError } from '../../error/appError.ts';
+import { HttpStatusCode } from '../../error/protocols.ts';
 
 const userSchema = z.object({
   name: z
@@ -18,11 +20,7 @@ export async function registerUserService(userData: UserInput) {
   const validate = userSchema.safeParse(userData);
 
   if (!validate.success) {
-    const errorMessages = validate.error.errors.map((err) => ({
-      field: err.path.join('.'),
-      message: err.message,
-    }));
-    throw new Error(JSON.stringify(errorMessages));
+    throw new AppError(validate.error);
   }
 
   const validatedData = validate.data;
@@ -31,7 +29,10 @@ export async function registerUserService(userData: UserInput) {
     where: { email: validatedData.email },
   });
   if (existingUser) {
-    throw new Error('User with this email already exists');
+    throw new AppError(
+      'User with this email already exists',
+      HttpStatusCode.BAD_REQUEST,
+    );
   }
 
   const salt = await bcrypt.genSalt(10);

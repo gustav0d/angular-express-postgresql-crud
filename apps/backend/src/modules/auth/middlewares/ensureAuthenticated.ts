@@ -2,7 +2,8 @@ import type { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { config } from '../../../config.ts';
 import { User, type UserAttributes } from '../userModel.ts';
-import { errorHandler } from '../../error/utils/errorResponse.ts';
+import { AppError } from '../../error/appError.ts';
+import { HttpStatusCode } from '../../error/protocols.ts';
 
 declare global {
   namespace Express {
@@ -20,10 +21,7 @@ export async function ensureAuthenticated(
   const token = request.headers.authorization?.replace('Bearer ', '');
 
   if (!token) {
-    errorHandler(response, {
-      errorMessage: 'No token provided',
-      statusCode: 401,
-    });
+    throw new AppError('No token provided', HttpStatusCode.UNAUTHORIZED);
   }
 
   const decoded = jwt.verify(token ?? '', config.JWT_SECRET) as {
@@ -33,13 +31,9 @@ export async function ensureAuthenticated(
   const userExists = await User.findByPk(decoded?.userId);
 
   if (!userExists) {
-    errorHandler(response, {
-      statusCode: 401,
-      errorMessage: 'Invalid token',
-    });
+    throw new AppError('Invalid token', HttpStatusCode.UNAUTHORIZED);
   }
-
+  
   request.user = userExists?.dataValues as Required<UserAttributes>;
-
-  return next();
+  next();
 }

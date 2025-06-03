@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
-import { errorHandler } from './utils/errorResponse.ts';
+import { AppError } from './appError.ts';
+import { HttpStatusCode } from './protocols.ts';
 
 const serverErrorCatcher = (
   err: Error,
@@ -7,22 +8,17 @@ const serverErrorCatcher = (
   response: Response,
   next: NextFunction,
 ) => {
-  if (err instanceof Error) {
-    errorHandler(response, {
-      errorTitle: err.name,
-      errorMessage: err.message,
-      statusCode: 400,
+  if (err instanceof AppError) {
+    response.status(err.statusCode).json({
+      message: err.message,
+      fieldErrors: err.fieldErrors,
     });
-
-    return next();
+  } else {
+    response.status(HttpStatusCode.SERVER_ERROR).json({
+      error: 'Internal Server Error',
+      message: err.message || 'An unexpected error occurred',
+    });
   }
-
-  errorHandler(response, {
-    errorTitle: 'Internal Server Error',
-    errorMessage: 'An unexpected error occurred.',
-    statusCode: 500,
-  });
-  return next();
 };
 
 export { serverErrorCatcher };
