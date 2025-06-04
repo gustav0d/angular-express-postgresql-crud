@@ -34,7 +34,8 @@ export async function updateTaskService(
   }
 
   const validatedData = validate.data;
-  await task.update(validatedData);
 
-  return task;
+  const updatedTask = await task.update(validatedData);
+
+  return updatedTask;
 }
