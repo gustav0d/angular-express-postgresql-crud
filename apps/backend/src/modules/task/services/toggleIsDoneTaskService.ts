@@ -12,7 +12,7 @@ export async function toggleIsDoneTaskService(taskId: number, userId: number) {
     throw new AppError('Task not found', HttpStatusCode.NOT_FOUND);
   }
 
-  const updatedTask = await task.update({ isDone: !!task.dataValues.isDone });
+  const updatedTask = await task.update({ isDone: !task.dataValues.isDone });
 
   return updatedTask;
 }
