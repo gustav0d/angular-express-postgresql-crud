@@ -61,12 +61,8 @@ export async function createTaskController(
     throw new AppError('User not authenticated', HttpStatusCode.UNAUTHORIZED);
   }
 
-  const { title, description, dueDate } = request.body;
-
   const task = await createTaskService({
-    title,
-    description,
-    dueDate,
+    ...request.body,
     userId,
   });
 
@@ -91,14 +87,7 @@ export async function updateTaskController(
     throw new AppError('Invalid task ID', HttpStatusCode.BAD_REQUEST);
   }
 
-  const { title, description, dueDate, isDone } = request.body;
-
-  const task = await updateTaskService(taskId, userId, {
-    title,
-    description,
-    dueDate,
-    isDone,
-  });
+  const task = await updateTaskService(taskId, userId, request.body);
 
   response.json({
     message: 'Task updated successfully',

@@ -7,9 +7,7 @@ export async function createUserController(
   request: Request,
   response: Response,
 ) {
-  const { name, email, password } = request.body;
-
-  const user = await registerUserService({ name, email, password });
+  const user = await registerUserService(request.body);
 
   response.status(HttpStatusCode.CREATED).json({
     message: 'User created successfully',
@@ -18,9 +16,7 @@ export async function createUserController(
 }
 
 export async function loginController(request: Request, response: Response) {
-  const { email, password } = request.body;
-
-  const result = await loginUserService({ email, password });
+  const result = await loginUserService(request.body);
 
   response.status(HttpStatusCode.OK).json({
     message: 'Login successful',
