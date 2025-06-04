@@ -15,14 +15,9 @@ const createTaskSchema = z.object({
 type CreateTaskInput = z.infer<typeof createTaskSchema>;
 
 export async function createTaskService(taskData: CreateTaskInput) {
-  const validate = createTaskSchema.safeParse(taskData);
-
-  if (!validate.success) {
-    throw new AppError(validate.error);
-  }
-
-  const validatedData = validate.data;
+  const validatedData = createTaskSchema.parse(taskData);
 
   const task = await Task.create(validatedData);
+
   return task;
 }

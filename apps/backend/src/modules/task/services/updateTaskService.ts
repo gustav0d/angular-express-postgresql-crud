@@ -19,11 +19,7 @@ export async function updateTaskService(
   userId: number,
   taskData: UpdateTaskInput,
 ) {
-  const validate = updateTaskSchema.safeParse(taskData);
-
-  if (!validate.success) {
-    throw new AppError(validate.error);
-  }
+  const validatedData = updateTaskSchema.parse(taskData);
 
   const task = await Task.findOne({
     where: { id: taskId, userId },
@@ -32,8 +28,6 @@ export async function updateTaskService(
   if (!task) {
     throw new AppError('Task not found', HttpStatusCode.NOT_FOUND);
   }
-
-  const validatedData = validate.data;
 
   const updatedTask = await task.update(validatedData);
 
