@@ -7,7 +7,7 @@ import {
 } from './services/getTasksServices.ts';
 import { createTaskService } from './services/createTaskService.ts';
 import { updateTaskService } from './services/updateTaskService.ts';
-import { markTaskAsDoneService } from './services/markTaskAsDoneService.ts';
+import { toggleIsDoneTaskService } from './services/toggleIsDoneTaskService.ts';
 import { deleteTaskService } from './services/deleteTaskService.ts';
 
 export async function getAllTasksController(
@@ -106,7 +106,7 @@ export async function updateTaskController(
   });
 }
 
-export async function markTaskAsDoneController(
+export async function toggleIsDoneTaskController(
   request: Request,
   response: Response,
 ) {
@@ -121,12 +121,10 @@ export async function markTaskAsDoneController(
     throw new AppError('Invalid task ID', HttpStatusCode.BAD_REQUEST);
   }
 
-  const { isDone } = request.body;
-
-  const task = await markTaskAsDoneService(taskId, userId, { isDone });
+  const task = await toggleIsDoneTaskService(taskId, userId);
 
   response.json({
-    message: `Task marked as ${isDone ? 'done' : 'undone'} successfully`,
+    message: `Task marked as ${task.dataValues.isDone ? 'done' : 'undone'} successfully`,
     task,
   });
 }

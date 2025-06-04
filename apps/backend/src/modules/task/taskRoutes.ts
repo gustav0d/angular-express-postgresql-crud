@@ -4,7 +4,7 @@ import {
   getTaskByIdController,
   createTaskController,
   updateTaskController,
-  markTaskAsDoneController,
+  toggleIsDoneTaskController,
   deleteTaskController,
 } from './taskController.ts';
 import { ensureAuthenticated } from '../auth/middlewares/ensureAuthenticated.ts';
@@ -17,7 +17,7 @@ taskRouter.get('/', getAllTasksController);
 taskRouter.get('/:id', getTaskByIdController);
 taskRouter.post('/', createTaskController);
 taskRouter.put('/:id', updateTaskController);
-taskRouter.patch('/:id', markTaskAsDoneController);
+taskRouter.patch('/:id', toggleIsDoneTaskController);
 taskRouter.delete('/:id', deleteTaskController);
 
 export { taskRouter };
