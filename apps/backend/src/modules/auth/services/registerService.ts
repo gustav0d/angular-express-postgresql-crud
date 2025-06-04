@@ -17,13 +17,7 @@ const userSchema = z.object({
 type UserInput = z.infer<typeof userSchema>;
 
 export async function registerUserService(userData: UserInput) {
-  const validate = userSchema.safeParse(userData);
-
-  if (!validate.success) {
-    throw new AppError(validate.error);
-  }
-
-  const validatedData = validate.data;
+  const validatedData = userSchema.parse(userData);
 
   const existingUser = await User.findOne({
     where: { email: validatedData.email },

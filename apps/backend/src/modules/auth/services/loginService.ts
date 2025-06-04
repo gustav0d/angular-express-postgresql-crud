@@ -14,20 +14,14 @@ const loginSchema = z.object({
 type LoginInput = z.infer<typeof loginSchema>;
 
 export async function loginUserService(loginData: LoginInput) {
-  const validate = loginSchema.safeParse(loginData);
-
-  if (!validate.success) {
-    throw new AppError(validate.error);
-  }
-
-  const validatedData = validate.data;
+  const validatedData = loginSchema.parse(loginData);
 
   const userExists = await User.scope('withPassword').findOne({
     where: { email: validatedData.email },
   });
 
   if (!userExists) {
-    throw new AppError('Invalid email or password',);
+    throw new AppError('Invalid email or password');
   }
 
   const user = userExists.dataValues as Required<UserAttributes>;
