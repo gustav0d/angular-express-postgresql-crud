@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+  <span class="flex-1 flex justify-center space-x-4">
+    <a mat-button routerLink="/" class="font-semibold">Home</a>
+    <a mat-button routerLink="/login" class="font-semibold">About</a>
+    <a mat-button routerLink="/register" class="font-semibold">About</a>
+  </span>
+</mat-toolbar>
+<div class="w-[100vw] md:w-[70vh] px-4 py-6 bg-gray-50">
+  <router-outlet />
+</div>
+<footer class="w-full bg-blue-600 text-white text-center py-4 mt-8">
+  <p class="text-sm">
+    made with <span class="text-red-400">☕</span> by
+    <a
+      href="https://github.com/gustav0d"
+      target="_blank"
+      class="underline hover:text-blue-200"
+      >Gustavo</a
+    >
+  </p>
+</footer>
