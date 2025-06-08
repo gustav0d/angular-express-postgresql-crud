@@ -1,33 +1,68 @@
 <mat-card class="shadow-lg py-8">
   <h2 class="text-2xl font-semibold mb-6 text-center">Register</h2>
-  <form class="flex flex-col space-y-4 px-8">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+    class="flex flex-col space-y-4 px-8"
+  >
     <mat-form-field>
       <mat-label>Name</mat-label>
-      <input matInput type="text" required />
+      <input matInput type="text" formControlName="name" required />
+      @if (form.get("name")?.hasError("required")) {
+        <mat-error>Name is required</mat-error>
+      }
+      @if (form.get("name")?.hasError("minlength")) {
+        <mat-error>Name must be at least 3 characters</mat-error>
+      }
     </mat-form-field>
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput type="email" required />
+      <input matInput type="email" formControlName="email" required />
+      @if (form.get("email")?.hasError("required")) {
+        <mat-error>Email is required</mat-error>
+      }
+      @if (form.get("email")?.hasError("email")) {
+        <mat-error>Invalid email</mat-error>
+      }
     </mat-form-field>
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input
-        matInput
-        type="password"
-        placeholder="Enter your password"
-        required
-      />
+      <input matInput type="password" formControlName="password" required />
+      @if (form.get("password")?.hasError("required")) {
+        <mat-error>Password is required</mat-error>
+      }
+      @if (form.get("password")?.hasError("minlength")) {
+        <mat-error>Password must be at least 6 characters</mat-error>
+      }
     </mat-form-field>
     <mat-form-field>
       <mat-label>Confirm Password</mat-label>
       <input
         matInput
         type="password"
-        placeholder="Confirm your password"
+        formControlName="confirmPassword"
         required
       />
+      @if (form.get("confirmPassword")?.hasError("required")) {
+        <mat-error>Confirmation is required</mat-error>
+      }
+      @if (form.hasError("notMatching")) {
+        <mat-error>Passwords do not match</mat-error>
+      }
     </mat-form-field>
-    <button mat-raised-button color="primary">Register</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="loading || form.invalid"
+    >
+      Register
+    </button>
+    @if (error) {
+      <div class="error-message">{{ error }}</div>
+    }
+    @if (success) {
+      <div class="success-message">{{ success }}</div>
+    }
   </form>
   <div class="mt-4 text-center">
     <a routerLink="/login" class="text-blue-600 hover:underline text-sm">
