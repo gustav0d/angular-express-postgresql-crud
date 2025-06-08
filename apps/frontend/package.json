@@ -3,13 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "dev": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "config:local": "cp .env.example .env",
-    "prestart": "dotenv -e .env -- envsubst < src/environments/environment.template.ts > src/environments/environment.ts"
+    "predev": "dotenv -e .env -- envsubst < src/environments/environment.template.ts > src/environments/environment.ts"
   },
   "private": true,
   "dependencies": {
