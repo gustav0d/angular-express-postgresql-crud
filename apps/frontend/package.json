@@ -3,15 +3,16 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "dev": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "config:local": "cp .env.example .env"
+    "config:local": "cp .env.example .env",
+    "predev": "dotenv -e .env -- envsubst < src/environments/environment.template.ts > src/environments/environment.ts"
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^20.0.1",
     "@angular/cdk": "^20.0.1",
     "@angular/common": "^20.0.0",
     "@angular/compiler": "^20.0.0",
@@ -32,6 +33,7 @@
     "@angular/cli": "^20.0.0",
     "@angular/compiler-cli": "^20.0.0",
     "@types/jasmine": "~5.1.0",
+    "dotenv-cli": "^8.0.0",
     "jasmine-core": "~5.7.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

@@ -1,0 +1,41 @@
+<mat-card class="shadow-lg py-8">
+  <h2 class="text-2xl font-semibold mb-6 text-center">Login</h2>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+    class="flex flex-col space-y-4 px-8"
+  >
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" required />
+      @if (form.get("email")?.hasError("required")) {
+        <mat-error>Email is required</mat-error>
+      }
+      @if (form.get("email")?.hasError("email")) {
+        <mat-error>Invalid email</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" required />
+      @if (form.get("password")?.hasError("required")) {
+        <mat-error>Password is required</mat-error>
+      }
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="loading || form.invalid"
+    >
+      Login
+    </button>
+    @if (error) {
+      <div class="error-message">{{ error }}</div>
+    }
+  </form>
+  <div class="mt-4 text-center">
+    <a routerLink="/register" class="text-blue-600 hover:underline text-sm">
+      Don't have an account? Register
+    </a>
+  </div>
+</mat-card>
