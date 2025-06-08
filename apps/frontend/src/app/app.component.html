@@ -1,21 +1,25 @@
-<mat-toolbar color="primary">
-  <span class="flex-1 flex justify-center space-x-4">
-    <a mat-button routerLink="/" class="font-semibold">Home</a>
-    <a mat-button routerLink="/login" class="font-semibold">About</a>
-    <a mat-button routerLink="/register" class="font-semibold">About</a>
-  </span>
-</mat-toolbar>
-<div class="w-[100vw] md:w-[70vh] px-4 py-6 bg-gray-50">
-  <router-outlet />
+<div class="flex flex-col min-h-screen bg-gray-50">
+  <mat-toolbar color="primary" class="h-[10vh]">
+    <nav class="flex-1 flex justify-center space-x-4">
+      <a mat-button routerLink="/" class="font-semibold">Home</a>
+      <a mat-button routerLink="/login" class="font-semibold">Login</a>
+      <a mat-button routerLink="/register" class="font-semibold">Register</a>
+    </nav>
+  </mat-toolbar>
+  <main class="flex items-center justify-center">
+    <div class="w-[80vw] md:w-[40vw] min-h-[80vh] px-4 py-6">
+      <router-outlet />
+    </div>
+  </main>
+  <footer class="w-full bg-blue-600 text-white text-center py-4 mt-8">
+    <p class="text-sm">
+      made with <span class="text-red-400">☕</span> by
+      <a
+        href="https://github.com/gustav0d"
+        target="_blank"
+        class="underline hover:text-blue-200"
+        >Gustavo</a
+      >
+    </p>
+  </footer>
 </div>
-<footer class="w-full bg-blue-600 text-white text-center py-4 mt-8">
-  <p class="text-sm">
-    made with <span class="text-red-400">☕</span> by
-    <a
-      href="https://github.com/gustav0d"
-      target="_blank"
-      class="underline hover:text-blue-200"
-      >Gustavo</a
-    >
-  </p>
-</footer>
