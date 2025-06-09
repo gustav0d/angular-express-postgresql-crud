@@ -1,0 +1,28 @@
+<mat-card class="mt-8 p-6">
+  <h2 class="text-xl font-semibold mb-4">Your Tasks</h2>
+  @if (loading) {
+    <div class="text-center py-8 text-gray-500">Loading...</div>
+  }
+  @if (error) {
+    <div class="text-center text-red-600 py-4">{{ error }}</div>
+  }
+  @if (!loading && !error) {
+    <mat-list>
+      @for (task of tasks; track task.id) {
+        <mat-list-item>
+          <mat-icon matListItemIcon color="primary">
+            {{ task.isDone ? "check_circle" : "radio_button_unchecked" }}
+          </mat-icon>
+          <span matListItemTitle class="font-medium">
+            {{ task.title }}
+          </span>
+          <span matListItemLine class="text-gray-500 text-sm"
+            >{{ task.description }}
+          </span>
+        </mat-list-item>
+      } @empty {
+        <div class="text-center text-gray-400 py-8">No tasks found.</div>
+      }
+    </mat-list>
+  }
+</mat-card>

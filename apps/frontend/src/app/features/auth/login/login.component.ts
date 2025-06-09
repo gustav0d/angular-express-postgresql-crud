@@ -50,7 +50,7 @@ export class LoginComponent {
       next: (res) => {
         if (res.token) localStorage.setItem('token', res.token);
         this.loading = false;
-        this.router.navigate(['/']);
+        this.router.navigate(['/tasks']);
       },
       error: (err) => {
         this.error = err;
