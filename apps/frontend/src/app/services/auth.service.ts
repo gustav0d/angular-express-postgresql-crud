@@ -39,6 +39,10 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
   private handleError(error: HttpErrorResponse) {
     let msg = 'An unknown error occurred';
     if (error.error?.message) msg = error.error.message;

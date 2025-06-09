@@ -2,8 +2,15 @@
   <mat-toolbar color="primary" class="h-[10vh]">
     <nav class="flex-1 flex justify-center space-x-4">
       <a mat-button routerLink="/" class="font-semibold">Home</a>
-      <a mat-button routerLink="/login" class="font-semibold">Login</a>
-      <a mat-button routerLink="/register" class="font-semibold">Register</a>
+      @if (auth.isLoggedIn()) {
+        <a mat-button routerLink="/tasks" class="font-semibold">Tasks</a>
+        <button mat-button (click)="logout()" class="font-semibold">
+          Logout
+        </button>
+      } @else {
+        <a mat-button routerLink="/login" class="font-semibold">Login</a>
+        <a mat-button routerLink="/register" class="font-semibold">Register</a>
+      }
     </nav>
   </mat-toolbar>
   <main class="flex items-center justify-center">
