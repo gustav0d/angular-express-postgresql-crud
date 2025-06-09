@@ -1,5 +1,16 @@
 <mat-card class="mt-8 p-6">
   <h2 class="text-xl font-semibold mb-4">Your Tasks</h2>
+  <div class="mb-4 flex justify-end">
+    <a
+      mat-raised-button
+      color="primary"
+      routerLink="/tasks/create"
+      [class.opacity-50]="loading || loadingToggleId !== null"
+      [class.pointer-events-none]="loading || loadingToggleId !== null"
+    >
+      + New Task
+    </a>
+  </div>
   @if (loading) {
     <div class="text-center py-8 text-gray-500">Loading...</div>
   }
@@ -10,14 +21,55 @@
     <mat-list>
       @for (task of tasks; track task.id) {
         <mat-list-item>
-          <mat-icon matListItemIcon color="primary">
+          <mat-icon
+            matListItemIcon
+            class="cursor-pointer"
+            color="primary"
+            (click)="toggleIsDone(task)"
+            [class.opacity-50]="loadingToggleId !== null"
+            [class.pointer-events-none]="loadingToggleId !== null"
+          >
             {{ task.isDone ? "check_circle" : "radio_button_unchecked" }}
           </mat-icon>
-          <span matListItemTitle class="font-medium">
-            {{ task.title }}
+          <span matListItemTitle class="font-medium">{{ task.title }}</span>
+          <span matListItemLine class="text-gray-500 text-sm">
+            {{ task.description }}
+            @if (task.dueDate) {
+              <span class="ml-2 text-xs text-blue-600"
+                >Due: {{ task.dueDate | date: "yyyy-MM-dd" }}</span
+              >
+            }
           </span>
-          <span matListItemLine class="text-gray-500 text-sm"
-            >{{ task.description }}
+          <span matListItemMeta class="ml-4 flex gap-2">
+            <a
+              mat-icon-button
+              color="accent"
+              [routerLink]="['/tasks/edit', task.id]"
+              title="Edit"
+              [class.opacity-50]="loadingToggleId !== null"
+              [class.pointer-events-none]="loadingToggleId !== null"
+            >
+              <mat-icon>edit</mat-icon>
+            </a>
+            <button
+              mat-icon-button
+              color="warn"
+              title="Delete"
+              (click)="deleteTask(task)"
+              [disabled]="deletingId === task.id || loadingToggleId !== null"
+              [class.opacity-50]="deletingId === task.id"
+            >
+              @if (deletingId !== task.id) {
+                <mat-icon>delete</mat-icon>
+              }
+              @if (deletingId === task.id) {
+                <mat-progress-spinner
+                  diameter="20"
+                  mode="indeterminate"
+                  color="warn"
+                ></mat-progress-spinner>
+              }
+            </button>
           </span>
         </mat-list-item>
       } @empty {
