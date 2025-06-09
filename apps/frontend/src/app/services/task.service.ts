@@ -9,6 +9,7 @@ export interface Task {
   id: Maybe<number>;
   title: Maybe<string>;
   description: Maybe<string>;
+  dueDate: Maybe<string | Date>;
   isDone: Maybe<boolean>;
 }
 
@@ -38,7 +39,7 @@ export class TaskService {
 
   update(id: number, task: Partial<Task>): Observable<Task> {
     return this.http
-      .put<{ task: Task }>(`${this.apiUrl}/${id}`, task)
+      .put<{ task: Task }>(`${this.apiUrl}/tasks/${id}`, task)
       .pipe(map((res) => res.task));
   }
 
@@ -49,6 +50,6 @@ export class TaskService {
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/tasks/${id}`);
   }
 }

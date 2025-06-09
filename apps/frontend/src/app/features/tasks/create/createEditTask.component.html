@@ -1,0 +1,67 @@
+<mat-card class="max-w-xl mx-auto mt-8 p-6">
+  <h2 class="text-xl font-semibold mb-4">
+    {{ isEdit ? "Edit Task" : "Create Task" }}
+  </h2>
+  <form [formGroup]="form" (ngSubmit)="submit()" class="flex flex-col gap-4">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        formControlName="title"
+        required
+        maxlength="100"
+        [disabled]="loading"
+      />
+      @if (form.get("title")?.hasError("required")) {
+        <mat-error>Title is required</mat-error>
+      }
+      @if (form.get("title")?.hasError("maxlength")) {
+        <mat-error>Title is too long</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        maxlength="255"
+        [disabled]="loading"
+      ></textarea>
+      @if (form.get("description")?.hasError("maxlength")) {
+        <mat-error>Description is too long</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Due Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="dueDate"
+        [disabled]="loading"
+        placeholder="YYYY-MM-DD"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="loading || form.invalid"
+    >
+      {{ isEdit ? "Update" : "Create" }}
+    </button>
+    <button
+      mat-stroked-button
+      color="accent"
+      type="button"
+      (click)="goBack()"
+      [disabled]="loading"
+    >
+      Go Back
+    </button>
+    @if (error) {
+      <div class="text-red-600 text-center mt-2">{{ error }}</div>
+    }
+  </form>
+</mat-card>

@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { RegisterComponent } from './features/auth/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ListTasksComponent } from './features/tasks/list/listTasks.component';
+import { CreateEditTaskComponent } from './features/tasks/create/createEditTask.component';
 
 export const routes: Routes = [
   {
@@ -22,5 +23,13 @@ export const routes: Routes = [
     path: 'tasks',
     component: ListTasksComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'tasks/create',
+    component: CreateEditTaskComponent,
+  },
+  {
+    path: 'tasks/edit/:id',
+    component: CreateEditTaskComponent,
   },
 ];
